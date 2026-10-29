@@ -50,7 +50,7 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--ink);
+  background: #2563eb;
   color: var(--paper);
   display: grid;
   place-items: center;
