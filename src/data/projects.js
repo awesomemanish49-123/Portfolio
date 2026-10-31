@@ -1,6 +1,12 @@
 /**
  * Project content. Add a new object here and it appears on the Work page,
  * gets its own /work/:slug route and a card on the home page (if featured).
+ *
+ * Imagery slots — both optional, the layout has designed fallbacks:
+ *   cover: '/shots/<slug>/cover.jpg'      hero panel, mosaic tile, index hover
+ *   screens: [{ title, caption, src: '/shots/<slug>/01.jpg' }, ...]
+ * Drop files in /public/shots/<slug>/ and reference them with a leading slash.
+ * Recommended: 2400x1500 (8:5) for covers, 1600x1000 for screens.
  */
 
 export const categories = [

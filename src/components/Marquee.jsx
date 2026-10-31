@@ -1,11 +1,12 @@
 const items = [
-  'GuruPayroll HRMS',
-  'Aarogya CRM',
+  'Enterprise SaaS',
+  'HRMS',
+  'CRM & operations',
   'Warehouse & stock',
   'Hospital operations',
-  'Patient & doctor app',
+  'Patient & doctor apps',
   'Design systems',
-  'Web + mobile',
+  'Brand & marketing',
 ]
 
 export default function Marquee() {

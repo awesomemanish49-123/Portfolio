@@ -23,6 +23,14 @@ export default function Reveal({
       return
     }
 
+    // Anything already on screen at mount should never wait for the observer:
+    // hidden tabs, print and screenshot renderers never fire it.
+    const box = el.getBoundingClientRect()
+    if (box.top < window.innerHeight && box.bottom > 0) {
+      setVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

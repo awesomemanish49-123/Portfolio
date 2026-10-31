@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import Reveal from '../components/Reveal.jsx'
-import ProjectCard from '../components/ProjectCard.jsx'
+import ProjectRow from '../components/ProjectRow.jsx'
 import { categories, projects } from '../data/projects.js'
 
 export default function Work() {
@@ -8,8 +8,8 @@ export default function Work() {
 
   const counts = useMemo(() => {
     const map = { [categories[0]]: projects.length }
-    projects.forEach((p) => {
-      map[p.category] = (map[p.category] || 0) + 1
+    projects.forEach((project) => {
+      map[project.category] = (map[project.category] || 0) + 1
     })
     return map
   }, [])
@@ -18,7 +18,7 @@ export default function Work() {
     () =>
       active === categories[0]
         ? projects
-        : projects.filter((p) => p.category === active),
+        : projects.filter((project) => project.category === active),
     [active]
   )
 
@@ -26,16 +26,17 @@ export default function Work() {
     <>
       <section className="shell">
         <div className="page-head">
-          <Reveal as="p" className="eyebrow">
-            Work · 2019 — 2026
+          <Reveal as="p" className="mono">
+            ( Work · 2019—2026 )
           </Reveal>
-          <Reveal as="h1" className="page-head__title" delay={50}>
+          <Reveal as="h1" className="page-head__title" delay={40}>
             Selected <em>work</em>
           </Reveal>
-          <Reveal as="p" className="lead" delay={100}>
+          <Reveal as="p" className="lead" delay={80}>
             Fifteen projects across three product suites — enterprise HR, a
             tele-sales CRM, warehouse and hospital operations, a patient app,
-            client work from Finoit, and the brand design that holds it together.
+            client work from Finoit, and the brand design that holds it
+            together.
           </Reveal>
         </div>
       </section>
@@ -56,13 +57,11 @@ export default function Work() {
           ))}
         </div>
 
-        <div className="work-grid">
-          {visible.map((project, i) => (
-            <Reveal key={project.slug} delay={(i % 3) * 60}>
-              <ProjectCard project={project} index={i} />
-            </Reveal>
+        <ul className="work-index">
+          {visible.map((project, index) => (
+            <ProjectRow key={project.slug} project={project} index={index} />
           ))}
-        </div>
+        </ul>
 
         {visible.length === 0 && (
           <p className="work-empty">Nothing in this category yet.</p>

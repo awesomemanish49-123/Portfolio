@@ -1,7 +1,8 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import Reveal from '../components/Reveal.jsx'
 import Shot from '../components/Shot.jsx'
-import { ArrowLeft, ArrowRight } from '../components/Icons.jsx'
+import Cover from '../components/Cover.jsx'
+import { ArrowLeft, ArrowUpRight } from '../components/Icons.jsx'
 import { getProject, nextProject } from '../data/projects.js'
 
 export default function CaseStudy() {
@@ -29,19 +30,19 @@ export default function CaseStudy() {
         </Link>
 
         <header className="case__head">
-          <Reveal as="p" className="eyebrow">
+          <Reveal as="p" className="mono">
             {project.client} · {project.year}
           </Reveal>
 
-          <Reveal as="h1" className="case__title" delay={50}>
+          <Reveal as="h1" className="case__title" delay={40}>
             {project.title}
           </Reveal>
 
-          <Reveal as="p" className="case__summary" delay={90}>
+          <Reveal as="p" className="case__summary" delay={80}>
             {project.summary}
           </Reveal>
 
-          <Reveal className="case__tags" delay={130}>
+          <Reveal className="case__tags" delay={120}>
             {project.tags.map((tag) => (
               <span className="chip" key={tag}>
                 {tag}
@@ -70,22 +71,8 @@ export default function CaseStudy() {
         </Reveal>
 
         <div className="case__hero">
-          <div
-            className="case-cover"
-            style={{
-              background: `linear-gradient(140deg, ${project.accent} 0%, #101012 92%)`,
-            }}
-          >
-            <span className="case-cover__grid" aria-hidden="true" />
-            <span className="case-cover__orb" aria-hidden="true" />
-            <div className="case-cover__inner">
-              <span className="case-cover__label">{project.category}</span>
-              <span className="case-cover__title">{project.title}</span>
-              <div className="case-cover__meta">
-                <span>{project.platform}</span>
-                <span>{project.status}</span>
-              </div>
-            </div>
+          <div className="case__cover">
+            <Cover project={project} priority />
           </div>
         </div>
 
@@ -172,10 +159,10 @@ export default function CaseStudy() {
               <section className="block" id="decisions">
                 <h2 className="block__title">Design decisions</h2>
                 <div className="decisions">
-                  {project.decisions.map((decision, i) => (
+                  {project.decisions.map((decision, index) => (
                     <div className="decision" key={decision.title}>
                       <span className="decision__num">
-                        {String(i + 1).padStart(2, '0')}
+                        {String(index + 1).padStart(2, '0')}
                       </span>
                       <div>
                         <h3 className="decision__title">{decision.title}</h3>
@@ -210,11 +197,11 @@ export default function CaseStudy() {
             <p className="next-project__label">Next project</p>
             <span className="next-project__title">
               {next.title}
-              <ArrowRight size={26} />
+              <ArrowUpRight size={30} />
             </span>
           </div>
-          <span className="mono" style={{ color: 'var(--on-ink-muted)' }}>
-            {next.category}
+          <span className="mono mono--invert">
+            {next.category} · {next.year}
           </span>
         </div>
       </Link>

@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { site } from '../data/site.js'
-import { ArrowRight } from './Icons.jsx'
+import { projects } from '../data/projects.js'
 
 const links = [
-  { to: '/', label: 'Home' },
-  { to: '/work', label: 'Work' },
+  { to: '/work', label: 'Work', count: projects.length },
   { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/contact', label: "Let's talk" },
 ]
+
+const drawerLinks = [{ to: '/', label: 'Home' }, ...links]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -18,7 +19,7 @@ export default function Header() {
   const drawerRef = useRef(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -58,49 +59,44 @@ export default function Header() {
 
   return (
     <>
-      <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
-        <div className="header__inner">
-          <Link to="/" className="brand" aria-label={`${site.name} — home`}>
-            <span className="brand__mark">M</span>
-            <span className="brand__meta">
-              <span>{site.name}</span>
-              <span className="brand__role">{site.role}</span>
-            </span>
-          </Link>
+      <header className={`header ${scrolled ? 'is-compact' : ''}`}>
+        <Link to="/" className="brand" aria-label={`${site.name} — home`}>
+          <span className="brand__top">Design partner — India</span>
+          <span className="brand__name">{site.name}</span>
+          <span className="brand__meta">UI/UX · Enterprise systems</span>
+          <span className="brand__mark" aria-hidden="true">
+            MK
+          </span>
+        </Link>
 
-          <nav className="nav" aria-label="Primary">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `nav__link ${isActive ? 'is-active' : ''}`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="header__actions">
-            <Link to="/contact" className="btn btn--dark btn--sm">
-              Let&rsquo;s talk
-              <span className="btn__arrow">
-                <ArrowRight size={14} />
-              </span>
-            </Link>
-            <button
-              ref={toggleRef}
-              className="menu-toggle"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
-              aria-controls="site-drawer"
-              aria-label={open ? 'Close menu' : 'Open menu'}
+        <nav className="nav" aria-label="Primary">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `nav__link ${isActive ? 'is-active' : ''}`
+              }
             >
-              <span />
-            </button>
-          </div>
+              {link.label}
+              {link.count ? (
+                <span className="nav__count">({link.count})</span>
+              ) : null}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="header__actions">
+          <button
+            ref={toggleRef}
+            className="menu-toggle"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="site-drawer"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+          >
+            <span />
+          </button>
         </div>
       </header>
 
@@ -112,9 +108,9 @@ export default function Header() {
         aria-hidden={!open}
       >
         <nav className="drawer__list" aria-label="Mobile">
-          {links.map((link, i) => (
+          {drawerLinks.map((link, index) => (
             <Link key={link.to} to={link.to} className="drawer__link">
-              <span>0{i + 1}</span>
+              <span>0{index + 1}</span>
               {link.label}
             </Link>
           ))}

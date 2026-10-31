@@ -1,68 +1,114 @@
 /* ============================================================
    Design tokens — Manish Kumar portfolio
-   Palette: warm paper, near-black ink, copper accent
+   Palette, type scale and grid referenced from fiddle.digital:
+   berry base, near-black blocks, one warm accent, mono labels.
    ============================================================ */
 
 :root {
-  /* Surfaces */
-  --paper: #f5f3ef;
-  --paper-2: #edeae4;
-  --paper-3: #e3dfd7;
-  --ink: #0b0b0c;
-  --ink-2: #141416;
-  --ink-3: #1e1e21;
+  color-scheme: light;
 
-  /* Text */
-  --muted: #6f6a62;
-  --muted-2: #928d85;
-  --on-ink: #f5f3ef;
-  --on-ink-muted: #9c988f;
+  /* ---------- Surfaces ---------- */
+  --berry: #c8c2cf;
+  --berry-2: #beb7c6;
+  --grey: #e6dfe4;
+  --grey-2: #dcd5dd;
+  --ink: #101214;
+  --ink-2: #191b1e;
+  --ink-3: #22252a;
+  --white: #ffffff;
 
-  /* Lines */
-  --line: rgba(11, 11, 12, 0.14);
-  --line-2: rgba(11, 11, 12, 0.08);
-  --line-3: rgba(11, 11, 12, 0.05);
-  --line-invert: rgba(245, 243, 239, 0.16);
-  --line-invert-2: rgba(245, 243, 239, 0.09);
+  /* Aliases kept so older rules stay readable */
+  --paper: var(--berry);
+  --paper-2: var(--grey);
+  --paper-3: var(--grey-2);
 
-  /* Accents */
-  --accent: #c0472b;
-  --accent-deep: #9c3a22;
-  --accent-soft: rgba(192, 71, 43, 0.1);
-  --signal: #3f6b4f;
+  /* ---------- Text ---------- */
+  --muted: #4f4852;
+  --muted-2: #6a6371;
+  --on-ink: var(--white);
+  --on-ink-muted: #a399a8;
 
-  /* Type */
-  --font-display: "Instrument Serif", "Iowan Old Style", "Times New Roman", serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* ---------- Lines ---------- */
+  --line: rgba(16, 18, 20, 0.16);
+  --line-2: rgba(16, 18, 20, 0.09);
+  --line-3: rgba(16, 18, 20, 0.05);
+  --line-invert: rgba(255, 255, 255, 0.22);
+  --line-invert-2: rgba(255, 255, 255, 0.11);
+
+  /* ---------- Accents ---------- */
+  --accent: #ff4f36;
+  --accent-deep: #e23c24;
+  --accent-soft: rgba(255, 79, 54, 0.12);
+  --signal: #4dbf9d;
+  --blue: #3687ff;
+  --yellow: #f4ff1e;
+
+  /* ---------- Type ---------- */
+  --font-sans: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans);
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Layout */
-  --shell: 1240px;
-  --gutter: clamp(20px, 5vw, 64px);
-  --section-y: clamp(72px, 10vw, 140px);
-  --header-h: 76px;
+  --fs-micro: 0.6875rem; /* 11px — mono labels */
+  --fs-small: 0.9375rem; /* 15px */
+  --fs-body: clamp(1rem, 0.3vw + 0.93rem, 1.25rem); /* 16 → 20 */
+  --fs-h6: clamp(1.25rem, 0.7vw + 1.11rem, 1.6875rem); /* 20 → 27 */
+  --fs-h5: clamp(1.5rem, 1.25vw + 1.25rem, 2.25rem); /* 24 → 36 */
+  --fs-h4: clamp(1.75rem, 2.1vw + 1.25rem, 2.9375rem); /* 28 → 47 */
+  --fs-h3: clamp(2rem, 3.1vw + 1.25rem, 3.9375rem); /* 32 → 63 */
+  --fs-h2: clamp(2.5rem, 4.4vw + 1.25rem, 5.25rem); /* 40 → 84 */
+  --fs-h1: clamp(3rem, 6.1vw + 1.4rem, 7rem); /* 48 → 112 */
+  --fs-display: clamp(3.25rem, 7.6vw + 1.6rem, 8.5rem); /* 52 → 136 */
 
-  /* Radii */
-  --r-xs: 8px;
-  --r-sm: 12px;
-  --r-md: 18px;
-  --r-lg: 26px;
-  --r-xl: 36px;
+  /* ---------- Layout ---------- */
+  --shell: 1920px;
+  --margin: clamp(12px, 1.15vw, 18px);
+  --gap: 4px;
+  --section-y: clamp(64px, 7vw, 120px);
+  --header-h: 104px;
+  --tile: clamp(96px, 8vw, 128px);
+
+  /* ---------- Radii ---------- */
+  --r-3: 3px;
+  --r-12: 12px;
+  --r-16: 16px;
+  --r-24: 24px;
+  --r-32: 32px;
   --r-pill: 999px;
 
-  /* Motion */
-  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Aliases */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
 
-  /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(11, 11, 12, 0.04), 0 8px 24px rgba(11, 11, 12, 0.04);
-  --shadow-md: 0 2px 6px rgba(11, 11, 12, 0.05), 0 24px 60px rgba(11, 11, 12, 0.09);
-  --shadow-lg: 0 4px 12px rgba(11, 11, 12, 0.06), 0 40px 100px rgba(11, 11, 12, 0.14);
+  /* ---------- Motion ---------- */
+  --f-cubic: cubic-bezier(0.22, 0.31, 0, 1);
+  --f-cubic-in: cubic-bezier(0.69, 0, 0, 1);
+  --f-fast: 0.2s;
+  --f-mid: 0.45s;
+  --f-slow: 0.9s;
+  --ease: var(--f-cubic);
+  --ease-out: var(--f-cubic);
+
+  /* ---------- Elevation ---------- */
+  --shadow-sm: 0 1px 0 rgba(16, 18, 20, 0.04);
+  --shadow-md: 0 1px 0 rgba(16, 18, 20, 0.05);
+  --shadow-lg: 0 1px 0 rgba(16, 18, 20, 0.06);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 72px;
+    --margin: 10px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
     --ease: linear;
     --ease-out: linear;
+    --f-slow: 0.01s;
   }
 }
